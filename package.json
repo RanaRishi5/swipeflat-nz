@@ -1,0 +1,12 @@
+{
+  "name": "swipeflat-nz",
+  "version": "1.0.0",
+  "description": "A playful swipe app that matches NZ students with compatible flatmates or rooms based on a lifestyle questionnaire.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

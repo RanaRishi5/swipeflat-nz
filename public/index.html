@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SwipeFlat NZ — Find your vibe, find your flat</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Floating glow blobs for the neon background -->
+  <div class="glow-blob blob-1"></div>
+  <div class="glow-blob blob-2"></div>
+  <div class="glow-blob blob-3"></div>
+
+  <!-- ===================== SCREEN 1: LANDING ===================== -->
+  <section id="screen-landing" class="screen active">
+    <div class="card landing-card">
+      <div class="logo-sticker">🏠✨</div>
+      <h1 class="app-title">Swipe<span>Flat</span> NZ</h1>
+      <p class="tagline">Find your flatmate soulmate (or at least someone who won't steal your milk).</p>
+      <p class="subtagline">Built for uni students across Aotearoa 🇳🇿</p>
+      <button class="btn btn-primary" id="btn-start">Let's go 🚀</button>
+    </div>
+  </section>
+
+  <!-- ===================== SCREEN 2: CITY SELECT ===================== -->
+  <section id="screen-city" class="screen">
+    <div class="card">
+      <h2 class="screen-title">Which city are you in?</h2>
+      <p class="screen-sub">We'll show you people and rooms nearby.</p>
+      <div class="chip-grid" id="city-grid">
+        <button class="chip city-chip" data-city="Auckland">Auckland</button>
+        <button class="chip city-chip" data-city="Hamilton">Hamilton</button>
+        <button class="chip city-chip" data-city="Wellington">Wellington</button>
+        <button class="chip city-chip" data-city="Christchurch">Christchurch</button>
+        <button class="chip city-chip" data-city="Dunedin">Dunedin</button>
+        <button class="chip city-chip" data-city="Tauranga">Tauranga</button>
+        <button class="chip city-chip" data-city="Whanganui">Whanganui</button>
+      </div>
+      <button class="btn btn-ghost" id="back-to-landing">← back</button>
+    </div>
+  </section>
+
+  <!-- ===================== SCREEN 3: MODE SELECT ===================== -->
+  <section id="screen-mode" class="screen">
+    <div class="card">
+      <h2 class="screen-title">What are you looking for?</h2>
+      <p class="screen-sub" id="mode-city-label"></p>
+      <div class="mode-grid">
+        <button class="mode-card" id="mode-flatmate" data-mode="flatmate">
+          <div class="mode-emoji">🧑‍🤝‍🧑</div>
+          <div class="mode-title">Find a Flatmate</div>
+          <div class="mode-desc">You've got a place (or are looking with others) — find people to share it with.</div>
+        </button>
+        <button class="mode-card" id="mode-room" data-mode="room">
+          <div class="mode-emoji">🛏️</div>
+          <div class="mode-title">Find a Room</div>
+          <div class="mode-desc">Browse rooms for rent and see which landlords/flats vibe with you.</div>
+        </button>
+      </div>
+      <button class="btn btn-ghost" id="back-to-city">← back</button>
+    </div>
+  </section>
+
+  <!-- ===================== SCREEN 4: QUESTIONNAIRE ===================== -->
+  <section id="screen-quiz" class="screen">
+    <div class="card quiz-card">
+      <h2 class="screen-title">Tell us your vibe 🎧</h2>
+      <p class="screen-sub">Be honest — the algorithm can smell a lie.</p>
+
+      <form id="quiz-form">
+        <div class="quiz-row two-col">
+          <label class="field">
+            <span>Your name</span>
+            <input type="text" id="q-name" placeholder="e.g. Alex" required>
+          </label>
+          <label class="field">
+            <span>Age</span>
+            <input type="number" id="q-age" min="16" max="99" placeholder="e.g. 21" required>
+          </label>
+        </div>
+
+        <label class="field">
+          <span>What are you studying?</span>
+          <input type="text" id="q-major" placeholder="e.g. Computer Science" required>
+        </label>
+
+        <label class="field">
+          <span>Weekly budget for rent (NZD)</span>
+          <div class="range-row">
+            <input type="range" id="q-budget" min="100" max="600" step="10" value="250">
+            <span class="range-value" id="q-budget-value">$250 / week</span>
+          </div>
+        </label>
+
+        <label class="field">
+          <span>Cleanliness — chaotic gremlin or neat freak?</span>
+          <div class="range-row">
+            <input type="range" id="q-clean" min="1" max="5" step="1" value="3">
+            <span class="range-value" id="q-clean-value">😐 Balanced</span>
+          </div>
+        </label>
+
+        <div class="quiz-row two-col">
+          <label class="field">
+            <span>Sleep schedule</span>
+            <select id="q-sleep" required>
+              <option value="early">🌅 Early bird</option>
+              <option value="flexible" selected>😴 Flexible</option>
+              <option value="night">🦉 Night owl</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Parties at the flat?</span>
+            <select id="q-party" required>
+              <option value="never">🚫 Never, quiet please</option>
+              <option value="sometimes" selected>🎉 Occasionally</option>
+              <option value="often">🪩 Regularly, let's go</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="quiz-row two-col">
+          <label class="field">
+            <span>Smoking</span>
+            <select id="q-smoking" required>
+              <option value="no" selected>Non-smoker</option>
+              <option value="social">Social smoker only</option>
+              <option value="yes">Smoker</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Pets</span>
+            <select id="q-pets" required>
+              <option value="have">I have a pet 🐶</option>
+              <option value="okay" selected>Okay with pets</option>
+              <option value="no">No pets please</option>
+            </select>
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Hobbies (pick a few)</span>
+          <div class="chip-grid small" id="hobby-grid" data-multiselect>
+            <button type="button" class="chip">🎮 Gaming</button>
+            <button type="button" class="chip">🏋️ Gym</button>
+            <button type="button" class="chip">🎨 Art</button>
+            <button type="button" class="chip">🍳 Cooking</button>
+            <button type="button" class="chip">🥾 Hiking</button>
+            <button type="button" class="chip">📚 Reading</button>
+            <button type="button" class="chip">🎬 Movies</button>
+            <button type="button" class="chip">⚽ Sports</button>
+            <button type="button" class="chip">🎸 Music</button>
+            <button type="button" class="chip">🪩 Partying</button>
+          </div>
+        </label>
+
+        <label class="field">
+          <span>Music taste (pick a few)</span>
+          <div class="chip-grid small" id="music-grid" data-multiselect>
+            <button type="button" class="chip">🎤 Pop</button>
+            <button type="button" class="chip">🎧 EDM</button>
+            <button type="button" class="chip">🎸 Rock</button>
+            <button type="button" class="chip">🥁 Hip-Hop</button>
+            <button type="button" class="chip">🌙 Indie</button>
+            <button type="button" class="chip">🎻 Classical</button>
+            <button type="button" class="chip">💃 K-Pop</button>
+            <button type="button" class="chip">🤠 Country</button>
+          </div>
+        </label>
+
+        <label class="field">
+          <span>Languages you speak (pick a few)</span>
+          <div class="chip-grid small" id="lang-grid" data-multiselect>
+            <button type="button" class="chip">English</button>
+            <button type="button" class="chip">Te Reo Māori</button>
+            <button type="button" class="chip">Mandarin</button>
+            <button type="button" class="chip">Hindi</button>
+            <button type="button" class="chip">Samoan</button>
+            <button type="button" class="chip">Spanish</button>
+            <button type="button" class="chip">Korean</button>
+            <button type="button" class="chip">Tagalog</button>
+          </div>
+        </label>
+
+        <label class="field">
+          <span>Past flatting / renting experience</span>
+          <select id="q-past">
+            <option value="first">First time renting — be gentle</option>
+            <option value="great" selected>Pretty great, no drama</option>
+            <option value="mixed">Mixed bag, some drama</option>
+            <option value="rocky">Rocky — I have stories</option>
+          </select>
+        </label>
+
+        <button type="submit" class="btn btn-primary btn-block" id="btn-find-vibe">Find my matches ✨</button>
+      </form>
+      <button class="btn btn-ghost" id="back-to-mode">← back</button>
+    </div>
+  </section>
+
+  <!-- ===================== SCREEN 5: LOADING ===================== -->
+  <section id="screen-loading" class="screen">
+    <div class="card loading-card">
+      <div class="loading-spinner">🌀</div>
+      <p class="loading-text" id="loading-text">Calculating vibes...</p>
+    </div>
+  </section>
+
+  <!-- ===================== SCREEN 6: SWIPE DECK ===================== -->
+  <section id="screen-swipe" class="screen">
+    <div class="swipe-header">
+      <button class="btn btn-ghost small" id="back-to-quiz">← restart</button>
+      <div class="swipe-header-title" id="swipe-title">Finding a Flatmate in Auckland</div>
+      <div class="swipe-counter" id="swipe-counter">1 / 8</div>
+    </div>
+
+    <div class="card-stack" id="card-stack"><!-- cards injected by script.js --></div>
+
+    <div class="swipe-actions">
+      <button class="action-btn pass" id="btn-pass" title="Pass">✖</button>
+      <button class="action-btn info" id="btn-info" title="Why this match?">ℹ️</button>
+      <button class="action-btn like" id="btn-like" title="Like">💚</button>
+    </div>
+  </section>
+
+  <!-- ===================== SCREEN 7: END OF DECK ===================== -->
+  <section id="screen-end" class="screen">
+    <div class="card">
+      <div class="logo-sticker">🎉</div>
+      <h2 class="screen-title">That's everyone for now!</h2>
+      <p class="screen-sub" id="end-summary"></p>
+      <button class="btn btn-primary" id="btn-restart">Start over</button>
+    </div>
+  </section>
+
+  <!-- ===================== MATCH POPUP (overlay) ===================== -->
+  <div id="match-overlay" class="overlay">
+    <div class="confetti" id="confetti"></div>
+    <div class="match-modal">
+      <div class="match-title">IT'S A MATCH! 🎊</div>
+      <div class="match-avatars">
+        <div class="match-avatar" id="match-avatar-you">🧑</div>
+        <div class="match-heart">💚</div>
+        <div class="match-avatar" id="match-avatar-them"></div>
+      </div>
+      <p class="match-name" id="match-name"></p>
+      <p class="match-joke" id="match-joke"></p>
+      <button class="btn btn-primary" id="btn-keep-swiping">Keep swiping</button>
+    </div>
+  </div>
+
+  <!-- Info popup for "why this match" -->
+  <div id="info-overlay" class="overlay">
+    <div class="match-modal">
+      <div class="match-title">The Breakdown 🔍</div>
+      <div id="info-breakdown" class="info-breakdown"></div>
+      <button class="btn btn-primary" id="btn-close-info">Got it</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
